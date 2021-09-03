@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31605.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiTracking", "ApiTracking\ApiTracking.csproj", "{6CB2982F-6758-4B44-96C5-1BFF8A04222B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6CB2982F-6758-4B44-96C5-1BFF8A04222B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CB2982F-6758-4B44-96C5-1BFF8A04222B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CB2982F-6758-4B44-96C5-1BFF8A04222B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CB2982F-6758-4B44-96C5-1BFF8A04222B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {478C2594-DF74-4257-B298-DE2268F3D35E}
+	EndGlobalSection
+EndGlobal

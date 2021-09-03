@@ -1,0 +1,54 @@
+﻿@model IEnumerable<ApiTracking.Models.Details>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Api Log Results</h2>
+        </div>
+        <form method="get">
+            <div class="input-group">
+                <input class="form-control" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">Search </button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+    <br />
+
+    @if (Model.Count() > 0)
+    {
+        <table class="table table-bordered table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>JsonResponse</th>
+                    <th>IsSuccess</th>
+                    <th>CreatedAt</th>
+                    <th>ModifiedAt</th>
+                    <th>ApiType</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.JsonResponse</td>
+                        <td>@item.IsSuccess</td>
+                        <td>@item.CreatedAt</td>
+                        <td>@item.ModifiedAt</td>
+                        <td>@item.ApiType</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No Items</p>
+    }
+
+</div>
