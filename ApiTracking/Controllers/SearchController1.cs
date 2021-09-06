@@ -20,30 +20,7 @@ namespace ApiTracking.Controllers
             _db = db;
         }
 
-        /// <summary>
-        /// IActionResult Index
-        /// </summary>
-        /// <returns></returns>
-        public IActionResult Index(int pg =1)
-        {
-            List<Details> objList = _db.ApiTracking.ToList();
-            const int pageSize = 3;
-            if (pg < 1)
-                pg = 1;
-
-            int recsCount = objList.Count();
-
-            var pager = new Pager(recsCount, pg, pageSize);
-
-            int recSkip = (pg - 1) * pageSize;
-
-            var data = objList.Skip(recSkip).Take(pager.PageSize).ToList();
-
-            this.ViewBag.Pager = pager;
-
-            return View(data);
-        }
-
+       
         
         /// <summary>
         /// Task<IActionResult> Index
@@ -51,16 +28,13 @@ namespace ApiTracking.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> Index(int id, int pg=1)
+        public async Task<IActionResult> Index(int id, int pg=1, string SearchText = "")
         {
             
 
             if (id == 0)
             {
-                /* var query = _db.ApiTracking.AsNoTracking().OrderBy(s => s.ID);
-                // var model = await PagingList.CreateAsync(query, 3, page);
-                 IEnumerable<Details> objList = _db.ApiTracking;
-                 return View(objList);*/
+                
                 List<Details> objList = _db.ApiTracking.ToList();
                 const int pageSize = 3;
                 if (pg < 1)
@@ -81,7 +55,7 @@ namespace ApiTracking.Controllers
             }
             else
             {
-                ViewData["Get Api Tracking Details"] = id;
+                ViewData["Get Api Tracking Details"] = SearchText;
 
                 var apiquery = from x in _db.ApiTracking select x;
                 apiquery = apiquery.Where(x => x.ID == id);
@@ -89,8 +63,20 @@ namespace ApiTracking.Controllers
             }
             
         }
+        public async Task<IActionResult> Search(string SearchText="")
+        {
+            List<Details> objList;
+            if(SearchText != "" && SearchText!= null)
+            {
+                objList = _db.ApiTracking.Where(p => p.JsonResponse.Contains(SearchText)).ToList();
+            }
+            else
+            objList= _db.ApiTracking.ToList();
+            return View(objList);
+        }
 
-     
+
+
 
 
     }

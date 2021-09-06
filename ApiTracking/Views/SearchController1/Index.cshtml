@@ -17,14 +17,24 @@
         <div class="col-7">
             <h2 class="text-primary">Api Log Results</h2>
         </div>
-        <form class="col-7" method="get" asp-action="Index">
-            <div class="input-group">
-                <input type="search" placeholder="Enter the ID" value="@ViewData["Get Api Tracking Details"]" name="id" />
-                <div class="input-group-append">
-                    <button type="submit" class="btn btn-primary">Search </button>
-                </div>
-            </div>
-        </form>
+        <!-- <form class="col-7" method="get" asp-action="Index">
+         <div class="input-group">
+             <input type="search" placeholder="Enter the ID" value="@ViewData["Get Api Tracking Details"]" name="id" />
+             <div class="input-group-append">
+                 <button type="submit" class="btn btn-primary">Search </button>
+             </div>
+         </div>
+     </form>-->
+
+        <div class="col-4 p-0 justify-content-end">
+            <form asp-controller="SearchController1" asp-action="Search">
+                <span class="btn-group">
+                    <input class="form-control" type="text" name="SearchText" placeholder="Search Text" />
+                    <input class="p-1 ml-2 btn btn-sm btn-info" type="submit" value="Search" />
+                </span>
+            </form>
+        </div>
+
         <partial name="_Pager" model="@pager" />
     </div>
     <br />
