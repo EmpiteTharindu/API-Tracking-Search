@@ -30,11 +30,7 @@ namespace ApiTracking.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(int id, int pg=1, string SearchText = "")
         {
-            
-
-            if (id == 0)
-            {
-                
+              
                 List<Details> objList = _db.ApiTracking.ToList();
                 const int pageSize = 3;
                 if (pg < 1)
@@ -52,16 +48,6 @@ namespace ApiTracking.Controllers
 
                 return View(data);
 
-            }
-            else
-            {
-                ViewData["Get Api Tracking Details"] = SearchText;
-
-                var apiquery = from x in _db.ApiTracking select x;
-                apiquery = apiquery.Where(x => x.ID == id);
-                return View(apiquery);
-            }
-            
         }
         public async Task<IActionResult> Search(string SearchText="")
         {
@@ -75,9 +61,6 @@ namespace ApiTracking.Controllers
             return View(objList);
         }
 
-
-
-
-
+     
     }
 }

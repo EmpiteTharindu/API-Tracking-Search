@@ -3,8 +3,6 @@
 @{
     ViewData["Title"] = "Index";
 
-    string intSno = "View";
-
     Pager pager = new Pager();
     int pageNo = 0;
     if (ViewBag.Pager != null)
@@ -13,12 +11,11 @@
         pageNo = pager.CurrentPage;
     }
 }
+
 <div class="container p-3">
     <div class="row pt-4">
-        <div class="col-6">
-            <a asp-controller="SearchController1" asp-action="Index">
-                <h2 class="text-primary">Api Log Results</h2>
-            </a>
+        <div class="col-7">
+            <h2 class="text-primary">Api Log Results</h2>
         </div>
 
         <div class="col-4 p-0 justify-content-end">
@@ -29,6 +26,7 @@
                 </span>
             </form>
         </div>
+
         <partial name="_Pager" model="@pager" />
     </div>
     <br />
@@ -38,7 +36,6 @@
         <table class="table table-bordered table-striped" style="width:100%">
             <thead>
                 <tr>
-                    <th></th>
                     <th>ID</th>
                     <th>JsonResponse</th>
                     <th>IsSuccess</th>
@@ -51,7 +48,6 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@intSno</td>
                         <td>@item.ID</td>
                         <td>@item.JsonResponse</td>
                         <td>@item.IsSuccess</td>
@@ -65,8 +61,11 @@
     }
     else
     {
-        <p>No Items</p>
+
     }
+
     <partial name="_Pager" model="@pager" />
 
 </div>
+
+
