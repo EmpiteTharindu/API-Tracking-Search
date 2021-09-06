@@ -59,8 +59,25 @@ namespace ApiTracking.Controllers
             else
             objList= _db.ApiTracking.ToList();
             return View(objList);
+          
         }
 
-     
+        public IActionResult View(int id)
+        {
+            try
+            {
+                IEnumerable<Details> objList = _db.ApiTracking;
+                var result = _db.ApiTracking.First(p => p.ID == id);
+                return Ok(result);
+
+
+            }
+            catch (Exception)
+            {
+
+                return BadRequest();
+            }
+        }
+
     }
 }

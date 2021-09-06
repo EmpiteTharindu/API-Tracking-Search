@@ -8,7 +8,6 @@ namespace ApiTracking.Models
 {
     public class Details
     {
-        
         public int ID { get; set; }
         public string JsonResponse { get; set; }
         public string IsSuccess { get; set; }
