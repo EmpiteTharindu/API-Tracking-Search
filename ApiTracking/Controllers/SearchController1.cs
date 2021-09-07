@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ApiTracking.Controllers
 {
@@ -67,8 +69,9 @@ namespace ApiTracking.Controllers
             try
             {
                 IEnumerable<Details> objList = _db.ApiTracking;
-                var result = _db.ApiTracking.First(p => p.ID == id);
-                return Ok(result);
+                var result = _db.ApiTracking.First(p => p.ID == id).JsonResponse;
+                ViewBag.JsonData = JValue.Parse(result).ToString(Formatting.Indented);
+                return Ok(ViewBag.JsonData);
 
 
             }
