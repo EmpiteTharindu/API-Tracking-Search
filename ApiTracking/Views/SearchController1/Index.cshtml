@@ -62,7 +62,7 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@intSno</td>
+                        <td>@Html.ActionLink("View", "View", new { id = item.ID }, new { target = "_blank" })</td>
                         <td>@item.ID</td>
                         <td>@item.JsonResponse</td>
                         <td>@item.IsSuccess</td>
