@@ -22,57 +22,67 @@ namespace ApiTracking.Controllers
             _db = db;
         }
 
-       
-        
         /// <summary>
         /// Task<IActionResult> Index
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> Index(int id, int pg=1, string SearchText = "")
+        public async Task<IActionResult> Index(int id, int pg = 1, string SearchText = "")
         {
-              
-                List<Details> objList = _db.ApiTracking.ToList();
-                const int pageSize = 3;
-                if (pg < 1)
-                    pg = 1;
 
-                int recsCount = objList.Count();
+            List<Details> objList = _db.ApiTracking.ToList();
+            const int pageSize = 3;
+            if (pg < 1)
+                pg = 1;
 
-                var pager = new Pager(recsCount, pg, pageSize);
+            int recsCount = objList.Count();
+            var pager = new Pager(recsCount, pg, pageSize);
+            int recSkip = (pg - 1) * pageSize;
+            var data = objList.Skip(recSkip).Take(pager.PageSize).ToList();
+            this.ViewBag.Pager = pager;
 
-                int recSkip = (pg - 1) * pageSize;
-
-                var data = objList.Skip(recSkip).Take(pager.PageSize).ToList();
-
-                this.ViewBag.Pager = pager;
-
-                return View(data);
+            return View(data);
 
         }
-        public async Task<IActionResult> Search(string SearchText="")
+
+        /// <summary>
+        /// Search
+        /// </summary>
+        /// <param name="SearchText"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> Search(string SearchText = "")
         {
             List<Details> objList;
-            if(SearchText != "" && SearchText!= null)
+            if (SearchText != "" && SearchText != null)
             {
                 objList = _db.ApiTracking.Where(p => p.JsonResponse.Contains(SearchText)).ToList();
             }
             else
-            objList= _db.ApiTracking.ToList();
+                objList = _db.ApiTracking.ToList();
+
             return View(objList);
-          
+
         }
 
+
+        /// <summary>
+        /// View
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult View(int id)
         {
             try
             {
-                IEnumerable<Details> objList = _db.ApiTracking;
+                /* IEnumerable<Details> objList = _db.ApiTracking;
+                 var result = _db.ApiTracking.First(p => p.ID == id).JsonResponse;
+                 ViewBag.JsonData = JValue.Parse(result).ToString(Formatting.Indented);
+                 return Ok(ViewBag.JsonData);*/
+
                 var result = _db.ApiTracking.First(p => p.ID == id).JsonResponse;
                 ViewBag.JsonData = JValue.Parse(result).ToString(Formatting.Indented);
                 return Ok(ViewBag.JsonData);
-
 
             }
             catch (Exception)
@@ -81,6 +91,20 @@ namespace ApiTracking.Controllers
                 return BadRequest();
             }
         }
+
+
+        public IActionResult displayJson(int id)
+        {
+            var result = _db.ApiTracking.First(p => p.ID == id);
+            //ViewBag.JsonData = JValue.Parse(result).ToString(Formatting.Indented);
+            return Ok(result);
+
+            /* string JSONString = string.Empty;
+             JSONString = JSONConvert.SerializeObject(result);
+             return JSONString;*/
+        }
+
+
 
     }
 }
