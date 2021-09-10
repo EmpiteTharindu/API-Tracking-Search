@@ -56,11 +56,7 @@
 
                         </td>
                         <td>@item.ID</td>
-                        <td>
-                            <pre>
-                                @Html.Raw(Newtonsoft.Json.Linq.JValue.Parse(item.JsonResponse).ToString(Newtonsoft.Json.Formatting.Indented))
-                            </pre>
-                        </td>
+                        <td>@item.JsonResponse</td>
                         <td>@item.IsSuccess</td>
                         <td>@item.CreatedAt</td>
                         <td>@item.ModifiedAt</td>

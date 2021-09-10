@@ -80,29 +80,25 @@ namespace ApiTracking.Controllers
                  ViewBag.JsonData = JValue.Parse(result).ToString(Formatting.Indented);
                  return Ok(ViewBag.JsonData);*/
 
-                var result = _db.ApiTracking.First(p => p.ID == id).JsonResponse;
-                ViewBag.JsonData = JValue.Parse(result).ToString(Formatting.Indented);
-                return Ok(ViewBag.JsonData);
+                IEnumerable<Details> objList;
+                if (id != null)
+                {
+                    objList = _db.ApiTracking.Where(x => x.ID == id);
+                }
+                else
+                    objList = _db.ApiTracking.ToList();
+
+                return View(objList);
 
             }
             catch (Exception)
             {
-
                 return BadRequest();
             }
         }
 
 
-        public IActionResult displayJson(int id)
-        {
-            var result = _db.ApiTracking.First(p => p.ID == id);
-            //ViewBag.JsonData = JValue.Parse(result).ToString(Formatting.Indented);
-            return Ok(result);
 
-            /* string JSONString = string.Empty;
-             JSONString = JSONConvert.SerializeObject(result);
-             return JSONString;*/
-        }
 
 
 

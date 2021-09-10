@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ApiTracking.Models.Details>
+
+
+@{
+}
+<div class="container p-3">
+    @if (Model.Count() > 0)
+    {
+        @foreach (var item in Model)
+        {
+
+            <span class="style5" style="margin-left:30px">Id = @item.ID</span>
+            <span class="style5" style="margin-left:30px">IsSuccess = @item.IsSuccess</span>
+            <span class="style5" style="margin-left:30px">CreatedAt = @item.CreatedAt</span>
+            <span class="style5" style="margin-left:30px">ModifiedAt = @item.ModifiedAt</span>
+            <span class="style5" style="margin-left:30px">ApiType = @item.ApiType</span>
+
+            <br />
+            <span class="firstLabel">
+                JsonResponse =
+                <br />
+                <br />
+                <textarea class="form-control">
+                
+                         @Html.Raw(Newtonsoft.Json.Linq.JValue.Parse(item.JsonResponse).ToString(Newtonsoft.Json.Formatting.Indented))
+                
+                </textarea>
+               
+            </span>
+
+        }
+
+    }
+    else
+    {
+        <p>No Items</p>
+    }
+</div>
